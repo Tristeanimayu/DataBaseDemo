@@ -1,0 +1,48 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@192.168.43.124:1521:orcl?useSSL=false
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: test1
+    password: test1
+
+  resources:
+    static-locations: classpath:static/
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    cache: false
+    servlet:
+      content-type: text/html
+
+  devtools:
+      restart:
+        enabled: true  #设置开启热部署
+        additional-paths: src/main/java #重启目录
+#        exclude: WEB-INF/**
+#      freemarker:
+#        cache: false    #页面不加载缓存，修改即时生效
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.yhj.spring.bean
+
+logging:
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  file:
+    path: "./logs/"
+    name: "./logs/my.log"
+  level:
+    root: INFO
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.txt
+
+
